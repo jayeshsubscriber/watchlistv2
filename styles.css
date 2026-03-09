@@ -571,7 +571,6 @@ body {
 /* Persona tabs: single unified table with persona-specific columns */
 .list-persona-single-wrap {
   display: none;
-  min-width: min-content;
 }
 
 .list-scroll-wrap.layout-multi.tab-swing .list-persona-single-wrap,
@@ -1037,9 +1036,17 @@ body {
 
 /* ========== Multi-column layout (WeBull-style) ========== */
 .list-scroll-wrap.layout-multi {
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 0;
+}
+
+.list-persona-table {
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
 }
 
 .list-header-multi {
@@ -1080,9 +1087,11 @@ body {
   flex-direction: row;
   align-items: center;
   padding: 8px 0;
+  padding-right: 16px;
   gap: 0;
   border-bottom: 1px solid #f1f1f1;
-  min-width: min-content;
+  width: max-content;
+  min-width: 100%;
   flex-shrink: 0;
 }
 
@@ -1100,9 +1109,15 @@ body {
 
 .list-multi-header .list-header-scrip {
   text-align: left;
-  width: 220px;
-  min-width: 220px;
-  padding-left: 0;
+  width: 146px;
+  min-width: 146px;
+  padding-left: 16px;
+  flex-shrink: 0;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #ffffff;
+  box-shadow: 4px 0 6px -2px rgba(0, 0, 0, 0.08);
 }
 
 .list-multi-header .list-header-num {
@@ -1201,11 +1216,14 @@ body {
   flex-direction: row;
   align-items: center;
   padding: 8px 0;
+  padding-right: 16px;
   gap: 0;
   border-bottom: 1px solid #f1f1f1;
-  min-width: min-content;
+  width: max-content;
+  min-width: 100%;
   min-height: 52px;
   box-sizing: border-box;
+  background: #ffffff;
 }
 
 .list-multi-cell {
@@ -1221,13 +1239,19 @@ body {
 /* Scrip column: match two-column .heading-combo typography */
 .list-multi-cell--scrip {
   text-align: left;
-  width: 220px;
-  min-width: 220px;
+  width: 146px;
+  min-width: 146px;
+  flex-shrink: 0;
   white-space: normal;
-  padding-left: 0;
+  padding-left: 16px;
   padding-right: 6px;
   font-size: 12px;
   line-height: 16px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #ffffff;
+  box-shadow: 4px 0 6px -2px rgba(0, 0, 0, 0.08);
 }
 
 .list-multi-cell--scrip strong {
@@ -1238,6 +1262,8 @@ body {
   color: #262626;
   display: block;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 0;
 }
 
