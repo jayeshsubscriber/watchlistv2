@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=360, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Watchlist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="watchlist" id="watchlist">
+    <!-- Status bar -->
+    <header class="status-bar">
+      <div class="status-bar-inner">
+        <div class="pin-left">
+          <span class="time">12:34</span>
+        </div>
+        <div class="pin-right">
+          <span class="icon-status" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M1 9l2 2c4-4 8-4 12 0l2-2C14 3 10 3 1 9z" fill="#262626"/><path d="M1 14l2 2c4-4 8-4 12 0l2-2" stroke="#262626" stroke-width="2"/></svg>
+          </span>
+          <span class="icon-status" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#262626"><rect x="2" y="6" width="4" height="12" rx="1"/><rect x="8" y="4" width="4" height="14" rx="1"/><rect x="14" y="2" width="4" height="16" rx="1"/><rect x="20" y="8" width="4" height="8" rx="1"/></svg>
+          </span>
+          <span class="icon-status" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#262626"><rect x="2" y="6" width="18" height="12" rx="2" stroke="#262626" stroke-width="2" fill="none"/><rect x="6" y="2" width="4" height="4" fill="#262626"/></svg>
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Top navigation -->
+    <nav class="top-nav">
+      <div class="nav-header-shared">
+        <div class="contained-logo">
+          <div class="logo-wrapper">
+            <div class="scrip-logo" aria-label="Upstox">Up</div>
+          </div>
+          <div class="icon-badge">
+            <svg class="chevron-down" width="10" height="10" viewBox="0 0 24 24" fill="#262626"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+        </div>
+        <span class="label-nav">Watchlist</span>
+      </div>
+      <div class="slot-group">
+        <button type="button" class="contained-icon" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button type="button" class="icon-wrapper" aria-label="Funds">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Index ticker -->
+    <section class="index-ticker">
+      <div class="index-ticker-inner">
+        <div class="index-divider-index">
+          <div class="index-tile">
+            <span class="label-index">NIFTY50</span>
+            <div class="ltp-delta">
+              <div class="content">
+                <span class="ltp green">24,571.09</span>
+                <div class="sub-heading-container">
+                  <span class="sub red">-120.34</span>
+                  <span class="sub red">(2.99%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="divider-vertical"></div>
+          <div class="index-tile">
+            <span class="label-index">NIFTY BANK</span>
+            <div class="ltp-delta">
+              <div class="content">
+                <span class="ltp green">56,993.15</span>
+                <div class="sub-heading-container">
+                  <span class="sub green">+232.07</span>
+                  <span class="sub green">(1.08%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="link-button" aria-label="More indices">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#262626"><path d="M7 10l5 5 5-5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="tabs-wrap">
+      <div class="tab-container">
+        <div class="tabs">
+          <button type="button" class="chip" data-tab="options">Options</button>
+          <button type="button" class="chip" data-tab="trending">Trending</button>
+          <button type="button" class="chip" data-tab="nifty50">Nifty 50</button>
+          <button type="button" class="chip" data-tab="swing">Swing Trading</button>
+          <button type="button" class="chip chip-active" data-tab="intraday">Intraday</button>
+          <button type="button" class="chip" data-tab="options_trader">Options Trader</button>
+          <button type="button" class="chip" data-tab="investor">Investor</button>
+        </div>
+        <div class="divider-vertical tabs-divider"></div>
+        <button type="button" class="btn-add" aria-label="Add list">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- List (scrollable) -->
+    <div class="list-scroll-wrap" id="list-scroll-wrap">
+      <!-- 2-col layout: single list, no section headers -->
+      <div class="list-two-col-wrap" id="list-two-col-wrap">
+        <header class="list-header list-header-simple">
+          <span class="list-header-scrip">Scrip</span>
+          <span class="list-header-price">Price</span>
+        </header>
+        <ul class="list list-simple" id="list-standard-list" role="list"></ul>
+      </div>
+
+      <!-- Multi-col layout: separate header rows for Stocks and F&O -->
+      <div class="list-multi-sections-wrap" id="list-multi-sections-wrap">
+        <div class="list-multi-body-outer" id="multi-col-body">
+          <!-- Stocks table: header "Stocks" instead of section title + Scrip -->
+          <div class="list-multi-block list-multi-block--stocks">
+            <div class="list-multi-header-outer">
+              <div class="list-multi-header list-multi-header--with-arrow">
+                <span class="list-header-cell list-header-scrip list-header-scrip-with-arrow">
+                  <span class="list-header-scrip-label">Stocks</span>
+                  <button type="button" class="list-header-scrip-arrow" id="multi-col-collapse-btn" aria-expanded="true" aria-label="Collapse list">
+                    <svg class="list-header-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+                  </button>
+                </span>
+                <span class="list-header-cell list-header-num list-header-price">Price</span>
+                <span class="list-header-cell list-header-num">% Change</span>
+                <span class="list-header-cell list-header-num">PE</span>
+                <span class="list-header-cell list-header-num">RSI</span>
+                <span class="list-header-cell list-header-num">1W Return</span>
+                <span class="list-header-cell list-header-num">52W H/L</span>
+              </div>
+            </div>
+          <div class="list-multi" id="list-multi-stocks" hidden>
+            <div class="list-multi-inner">
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>RELIANCE</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">2,412.50</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+1.20%</span>
+                <span class="list-multi-cell list-multi-cell--num">22.5</span>
+                <span class="list-multi-cell list-multi-cell--num">58</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+0.8%</span>
+                <span class="list-multi-cell list-multi-cell--num">2510/2180</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>TATASTEEL</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">139.70</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-2.07%</span>
+                <span class="list-multi-cell list-multi-cell--num">5.8</span>
+                <span class="list-multi-cell list-multi-cell--num">42</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-1.2%</span>
+                <span class="list-multi-cell list-multi-cell--num">155/98</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>HDFCBANK</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">1,658.20</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+0.81%</span>
+                <span class="list-multi-cell list-multi-cell--num">18.2</span>
+                <span class="list-multi-cell list-multi-cell--num">52</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+0.5%</span>
+                <span class="list-multi-cell list-multi-cell--num">1720/1580</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>INFY</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">1,489.00</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-0.50%</span>
+                <span class="list-multi-cell list-multi-cell--num">24.0</span>
+                <span class="list-multi-cell list-multi-cell--num">48</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-0.3%</span>
+                <span class="list-multi-cell list-multi-cell--num">1620/1380</span>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!-- F&O table: header "Indices & FnO" instead of section title + Scrip -->
+          <div class="list-multi-block list-multi-block--fo">
+            <div class="list-multi-header-outer">
+              <div class="list-multi-header list-multi-header--with-arrow">
+                <span class="list-header-cell list-header-scrip list-header-scrip-with-arrow">
+                  <span class="list-header-scrip-label">Indices & FnO</span>
+                  <button type="button" class="list-header-scrip-arrow" id="multi-col-collapse-fo-btn" aria-expanded="true" aria-label="Collapse list">
+                    <svg class="list-header-arrow-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+                  </button>
+                </span>
+                <span class="list-header-cell list-header-num list-header-price">Price</span>
+                <span class="list-header-cell list-header-num">% Change</span>
+                <span class="list-header-cell list-header-num">PE</span>
+                <span class="list-header-cell list-header-num">RSI</span>
+                <span class="list-header-cell list-header-num">1W Return</span>
+                <span class="list-header-cell list-header-num">52W H/L</span>
+              </div>
+            </div>
+          <div class="list-multi" id="list-multi" hidden>
+            <div class="list-multi-inner">
+          <div class="list-multi-row" data-price="349.50" data-pct="27.71" data-neg="true">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25550 CE</strong><span class="list-multi-sub">NFO 26 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">349.50</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-27.71%</span>
+            <span class="list-multi-cell list-multi-cell--num">—</span>
+            <span class="list-multi-cell list-multi-cell--num">42</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-2.1%</span>
+            <span class="list-multi-cell list-multi-cell--num">380/320</span>
+          </div>
+          <div class="list-multi-row" data-price="400.90" data-pct="11.45" data-neg="false">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>BANKNIFTY 59500 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">400.90</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+11.45%</span>
+            <span class="list-multi-cell list-multi-cell--num">—</span>
+            <span class="list-multi-cell list-multi-cell--num">58</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+3.2%</span>
+            <span class="list-multi-cell list-multi-cell--num">420/350</span>
+          </div>
+          <div class="list-multi-row" data-price="275.45" data-pct="14.89" data-neg="true">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25800 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">275.45</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-14.89%</span>
+            <span class="list-multi-cell list-multi-cell--num">22.5</span>
+            <span class="list-multi-cell list-multi-cell--num">35</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-1.5%</span>
+            <span class="list-multi-cell list-multi-cell--num">310/260</span>
+          </div>
+          <div class="list-multi-row" data-price="31.20" data-pct="22.83" data-neg="false">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>SENSEX 83200 CE</strong><span class="list-multi-sub">NFO 11 FEB 25</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">31.20</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+22.83%</span>
+            <span class="list-multi-cell list-multi-cell--num">—</span>
+            <span class="list-multi-cell list-multi-cell--num">61</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+5.0%</span>
+            <span class="list-multi-cell list-multi-cell--num">35/22</span>
+          </div>
+          <div class="list-multi-row" data-price="4.20" data-pct="30.58" data-neg="true">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25550 CE</strong><span class="list-multi-sub">NFO 26 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">4.20</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-30.58%</span>
+            <span class="list-multi-cell list-multi-cell--num">—</span>
+            <span class="list-multi-cell list-multi-cell--num">28</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-8.2%</span>
+            <span class="list-multi-cell list-multi-cell--num">6.5/3.1</span>
+          </div>
+          <div class="list-multi-row" data-price="10.97" data-pct="24.39" data-neg="false">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>BANKNIFTY 59500 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">10.97</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+24.39%</span>
+            <span class="list-multi-cell list-multi-cell--num">—</span>
+            <span class="list-multi-cell list-multi-cell--num">55</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+4.1%</span>
+            <span class="list-multi-cell list-multi-cell--num">12/8</span>
+          </div>
+          <div class="list-multi-row" data-price="324.80" data-pct="21.92" data-neg="true">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25800 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">324.80</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-21.92%</span>
+            <span class="list-multi-cell list-multi-cell--num">18.2</span>
+            <span class="list-multi-cell list-multi-cell--num">38</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-4.0%</span>
+            <span class="list-multi-cell list-multi-cell--num">380/300</span>
+          </div>
+          <div class="list-multi-row" data-price="139.70" data-pct="19.11" data-neg="false">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>SENSEX 83200 CE</strong><span class="list-multi-sub">NFO 11 FEB 25</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">139.70</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+19.11%</span>
+            <span class="list-multi-cell list-multi-cell--num">—</span>
+            <span class="list-multi-cell list-multi-cell--num">52</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+6.2%</span>
+            <span class="list-multi-cell list-multi-cell--num">155/98</span>
+          </div>
+          <div class="list-multi-row" data-price="9590.00" data-pct="4.20" data-neg="true">
+            <span class="list-multi-cell list-multi-cell--scrip"><strong>FINNIFTY 27700 CE</strong><span class="list-multi-sub">NFO 26 FEB 26</span></span>
+            <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">9,590.00</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-4.20%</span>
+            <span class="list-multi-cell list-multi-cell--num">25.0</span>
+            <span class="list-multi-cell list-multi-cell--num">45</span>
+            <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-0.8%</span>
+            <span class="list-multi-cell list-multi-cell--num">10200/9100</span>
+          </div>
+        </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <!-- Nifty 50 tab: single table (Stocks + F&O + Indices), same columns -->
+      <div class="list-nifty50-single-wrap" id="list-nifty50-single-wrap">
+        <div class="list-multi-body-outer">
+          <div class="list-multi-header-outer">
+            <div class="list-multi-header">
+              <span class="list-header-cell list-header-scrip">Scrip</span>
+              <span class="list-header-cell list-header-num list-header-price">Price</span>
+              <span class="list-header-cell list-header-num">% Change</span>
+              <span class="list-header-cell list-header-num">PE</span>
+              <span class="list-header-cell list-header-num">RSI</span>
+              <span class="list-header-cell list-header-num">1W Return</span>
+              <span class="list-header-cell list-header-num">52W H/L</span>
+            </div>
+          </div>
+          <div class="list-multi" id="list-nifty50-unified">
+            <div class="list-multi-inner">
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>RELIANCE</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">2,412.50</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+1.20%</span>
+                <span class="list-multi-cell list-multi-cell--num">22.5</span>
+                <span class="list-multi-cell list-multi-cell--num">58</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+0.8%</span>
+                <span class="list-multi-cell list-multi-cell--num">2510/2180</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>TATASTEEL</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">139.70</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-2.07%</span>
+                <span class="list-multi-cell list-multi-cell--num">5.8</span>
+                <span class="list-multi-cell list-multi-cell--num">42</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-1.2%</span>
+                <span class="list-multi-cell list-multi-cell--num">155/98</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>HDFCBANK</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">1,658.20</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+0.81%</span>
+                <span class="list-multi-cell list-multi-cell--num">18.2</span>
+                <span class="list-multi-cell list-multi-cell--num">52</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+0.5%</span>
+                <span class="list-multi-cell list-multi-cell--num">1720/1580</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>INFY</strong><span class="list-multi-sub">NSE EQ</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">1,489.00</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-0.50%</span>
+                <span class="list-multi-cell list-multi-cell--num">24.0</span>
+                <span class="list-multi-cell list-multi-cell--num">48</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-0.3%</span>
+                <span class="list-multi-cell list-multi-cell--num">1620/1380</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25550 CE</strong><span class="list-multi-sub">NFO 26 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">349.50</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-27.71%</span>
+                <span class="list-multi-cell list-multi-cell--num">—</span>
+                <span class="list-multi-cell list-multi-cell--num">42</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-2.1%</span>
+                <span class="list-multi-cell list-multi-cell--num">380/320</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>BANKNIFTY 59500 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">400.90</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+11.45%</span>
+                <span class="list-multi-cell list-multi-cell--num">—</span>
+                <span class="list-multi-cell list-multi-cell--num">58</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+3.2%</span>
+                <span class="list-multi-cell list-multi-cell--num">420/350</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25800 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">275.45</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-14.89%</span>
+                <span class="list-multi-cell list-multi-cell--num">22.5</span>
+                <span class="list-multi-cell list-multi-cell--num">35</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-1.5%</span>
+                <span class="list-multi-cell list-multi-cell--num">310/260</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>SENSEX 83200 CE</strong><span class="list-multi-sub">NFO 11 FEB 25</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">31.20</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+22.83%</span>
+                <span class="list-multi-cell list-multi-cell--num">—</span>
+                <span class="list-multi-cell list-multi-cell--num">61</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+5.0%</span>
+                <span class="list-multi-cell list-multi-cell--num">35/22</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25550 CE</strong><span class="list-multi-sub">NFO 26 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">4.20</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-30.58%</span>
+                <span class="list-multi-cell list-multi-cell--num">—</span>
+                <span class="list-multi-cell list-multi-cell--num">28</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-8.2%</span>
+                <span class="list-multi-cell list-multi-cell--num">6.5/3.1</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>BANKNIFTY 59500 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">10.97</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+24.39%</span>
+                <span class="list-multi-cell list-multi-cell--num">—</span>
+                <span class="list-multi-cell list-multi-cell--num">55</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+4.1%</span>
+                <span class="list-multi-cell list-multi-cell--num">12/8</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>NIFTY 25800 PE</strong><span class="list-multi-sub">NFO 10 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">324.80</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-21.92%</span>
+                <span class="list-multi-cell list-multi-cell--num">18.2</span>
+                <span class="list-multi-cell list-multi-cell--num">38</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-4.0%</span>
+                <span class="list-multi-cell list-multi-cell--num">380/300</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>SENSEX 83200 CE</strong><span class="list-multi-sub">NFO 11 FEB 25</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--green">139.70</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+19.11%</span>
+                <span class="list-multi-cell list-multi-cell--num">—</span>
+                <span class="list-multi-cell list-multi-cell--num">52</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--green">+6.2%</span>
+                <span class="list-multi-cell list-multi-cell--num">155/98</span>
+              </div>
+              <div class="list-multi-row">
+                <span class="list-multi-cell list-multi-cell--scrip"><strong>FINNIFTY 27700 CE</strong><span class="list-multi-sub">NFO 26 FEB 26</span></span>
+                <span class="list-multi-cell list-multi-cell--price list-multi-cell--num list-multi-cell--red">9,590.00</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-4.20%</span>
+                <span class="list-multi-cell list-multi-cell--num">25.0</span>
+                <span class="list-multi-cell list-multi-cell--num">45</span>
+                <span class="list-multi-cell list-multi-cell--num list-multi-cell--red">-0.8%</span>
+                <span class="list-multi-cell list-multi-cell--num">10200/9100</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Persona tabs: single table (Stocks + F&O) with persona-specific columns -->
+      <div class="list-persona-single-wrap" id="list-persona-single-wrap">
+        <div class="list-multi-body-outer">
+          <div class="list-multi-header-outer">
+            <div class="list-multi-header" id="list-persona-header"></div>
+          </div>
+          <div class="list-multi" id="list-persona-body">
+            <div class="list-multi-inner" id="list-persona-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: FAB + Nav -->
+    <div class="bottom-nav">
+      <div class="fab-row">
+        <button type="button" class="fab fab-sort">
+          <svg class="sort-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#542087" stroke-width="2"><path d="M3 6h18M3 12h12M3 18h6"/><circle cx="17" cy="18" r="2" fill="#542087"/></svg>
+          <span class="fab-label">Price</span>
+        </button>
+        <div class="fab-group-right">
+          <button type="button" class="fab fab-more" id="fab-more" aria-label="More options">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#542087"><circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/></svg>
+          </button>
+          <button type="button" class="fab fab-chart" id="fab-chart" aria-label="Chart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#542087" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 6 13 17 8.5 12 2 19"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="bottom-navbar">
+        <div class="divider-horizontal"></div>
+        <div class="tabs-bottom">
+          <button type="button" class="tab-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="tab-label">Home</span>
+          </button>
+          <button type="button" class="tab-item tab-item-active">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#262626"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span class="tab-label">My Lists</span>
+          </button>
+          <button type="button" class="tab-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <span class="tab-label">Orders</span>
+          </button>
+          <button type="button" class="tab-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span class="tab-label">Positions</span>
+          </button>
+          <button type="button" class="tab-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
+            <span class="tab-label">Holdings</span>
+          </button>
+        </div>
+      </div>
+      <div class="system-nav">
+        <div class="drawer-handle"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom sheet overlay + sheet as body children so fixed positions to viewport -->
+  <div class="bottomsheet-overlay" id="bottomsheet-overlay" aria-hidden="true"></div>
+  <div class="bottomsheet Manage" id="bottomsheet" role="dialog" aria-modal="true" aria-label="Watchlist options">
+    <div class="bottomsheet-grab-handle">
+      <div class="bottomsheet-bar" aria-hidden="true"></div>
+    </div>
+    <div class="bottomsheet-container">
+      <button type="button" class="bottomsheet-row" data-action="manage-watchlists">
+        <span class="bottomsheet-label">Manage all watchlists</span>
+        <span class="bottomsheet-icon-wrapper">
+          <svg class="bottomsheet-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </button>
+      <div class="bottomsheet-divider-horizontal"></div>
+      <button type="button" class="bottomsheet-row" data-action="manage-stocks">
+        <span class="bottomsheet-label">Manage stocks in list</span>
+        <span class="bottomsheet-icon-wrapper">
+          <svg class="bottomsheet-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </button>
+      <div class="bottomsheet-divider-horizontal"></div>
+      <button type="button" class="bottomsheet-row" data-action="watchlist-preferences">
+        <span class="bottomsheet-label">Watchlist Preferences</span>
+        <span class="bottomsheet-icon-wrapper">
+          <svg class="bottomsheet-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  <!-- Watchlist Preferences modal -->
+  <div class="prefs-overlay" id="prefs-overlay" aria-hidden="true"></div>
+  <div class="prefs-panel" id="prefs-panel" role="dialog" aria-modal="true" aria-labelledby="prefs-title">
+    <header class="prefs-header">
+      <h2 class="prefs-title" id="prefs-title">Watchlist Preferences</h2>
+      <button type="button" class="prefs-close" id="prefs-close" aria-label="Close">×</button>
+    </header>
+    <div class="prefs-body">
+      <section class="prefs-section">
+        <h3 class="prefs-section-title">View layout</h3>
+        <div class="prefs-layout-options">
+          <label class="prefs-layout-option">
+            <input type="radio" name="prefs-layout" value="standard" id="prefs-layout-standard" />
+            <span class="prefs-layout-label">Standard View</span>
+          </label>
+          <label class="prefs-layout-option">
+            <input type="radio" name="prefs-layout" value="multi" id="prefs-layout-multi" />
+            <span class="prefs-layout-label">Multi-Column View</span>
+          </label>
+        </div>
+        <button type="button" class="prefs-edit-columns-cta" id="prefs-edit-columns-cta" aria-label="Edit columns" hidden>Edit columns</button>
+      </section>
+      <section class="prefs-section prefs-section-tags">
+        <h3 class="prefs-section-title">Watchlist Signals</h3>
+        <p class="prefs-hint">Choose which signal categories to show on watchlisted scrips.</p>
+        <div class="prefs-tags-list">
+          <label class="prefs-tags-row">
+            <span class="prefs-tags-content">
+              <span class="prefs-tags-label">Market events</span>
+              <span class="prefs-tags-subtext">Corporate Actions, Earnings and News</span>
+            </span>
+            <span class="prefs-switch">
+              <input type="checkbox" class="prefs-tags-cb" id="prefs-tag-market-events" data-tag="market_events" />
+              <span class="prefs-switch-track" aria-hidden="true"></span>
+            </span>
+          </label>
+          <label class="prefs-tags-row">
+            <span class="prefs-tags-content">
+              <span class="prefs-tags-label">Price Signals</span>
+              <span class="prefs-tags-subtext">Open = High / Open = Low, Gap Up / Down, 52W Break</span>
+            </span>
+            <span class="prefs-switch">
+              <input type="checkbox" class="prefs-tags-cb" id="prefs-tag-price-signals" data-tag="price_signals" />
+              <span class="prefs-switch-track" aria-hidden="true"></span>
+            </span>
+          </label>
+          <label class="prefs-tags-row">
+            <span class="prefs-tags-content">
+              <span class="prefs-tags-label">Momentum &amp; Technical Signals</span>
+              <span class="prefs-tags-subtext">Price Breakout, Volume Spike, Delivery Spike, RSI Overbought / Oversold etc.</span>
+            </span>
+            <span class="prefs-switch">
+              <input type="checkbox" class="prefs-tags-cb" id="prefs-tag-momentum" data-tag="momentum_technical_signals" />
+              <span class="prefs-switch-track" aria-hidden="true"></span>
+            </span>
+          </label>
+          <label class="prefs-tags-row">
+            <span class="prefs-tags-content">
+              <span class="prefs-tags-label">Derivatives</span>
+              <span class="prefs-tags-subtext">OI Spike, Long Buildup, Short Buildup</span>
+            </span>
+            <span class="prefs-switch">
+              <input type="checkbox" class="prefs-tags-cb" id="prefs-tag-derivatives" data-tag="derivatives" />
+              <span class="prefs-switch-track" aria-hidden="true"></span>
+            </span>
+          </label>
+        </div>
+      </section>
+    </div>
+    <footer class="prefs-footer">
+      <button type="button" class="prefs-done" id="prefs-done">Done</button>
+    </footer>
+  </div>
+  <!-- Bottom modal: persona + columns (when Multi-Column View is selected) -->
+  <div class="prefs-columns-overlay" id="prefs-columns-overlay" aria-hidden="true"></div>
+  <div class="prefs-columns-sheet" id="prefs-columns-sheet" role="dialog" aria-modal="true" aria-label="Select columns">
+    <div class="prefs-columns-grab">
+      <div class="prefs-columns-bar"></div>
+    </div>
+    <div class="prefs-columns-body">
+      <h3 class="prefs-columns-title">Quick select by trading style</h3>
+      <p class="prefs-hint">Tap a style to select a set of columns at once. You can then change individual columns below.</p>
+      <div class="prefs-personas prefs-personas--sheet" id="prefs-personas-sheet">
+        <button type="button" class="prefs-persona" data-persona="options_trader">Options Trader</button>
+        <button type="button" class="prefs-persona" data-persona="short_term_equity">Short Term Equity Trader</button>
+        <button type="button" class="prefs-persona" data-persona="intraday">Intraday Trader</button>
+        <button type="button" class="prefs-persona" data-persona="long_term">Long term investor</button>
+      </div>
+      <h3 class="prefs-columns-title">Columns</h3>
+      <p class="prefs-hint">Price and % Change are always first and cannot be reordered. Drag to reorder other columns.</p>
+      <ul class="prefs-columns-list" id="prefs-columns-list" role="list"></ul>
+    </div>
+    <footer class="prefs-columns-footer">
+      <button type="button" class="prefs-columns-done" id="prefs-columns-done">Done</button>
+    </footer>
+  </div>
+  <!-- Edit watchlist (Manage stocks in list) -->
+  <div class="edit-wl-overlay" id="edit-wl-overlay" aria-hidden="true"></div>
+  <div class="edit-wl-panel" id="edit-wl-panel" role="dialog" aria-modal="true" aria-labelledby="edit-wl-title">
+    <header class="edit-wl-header">
+      <button type="button" class="edit-wl-back" id="edit-wl-back" aria-label="Back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <h2 class="edit-wl-title" id="edit-wl-title">Edit watchlist</h2>
+    </header>
+    <div class="edit-wl-list-wrap">
+      <ul class="edit-wl-list" id="edit-wl-list" role="list"></ul>
+      <div class="edit-wl-divider-h"></div>
+      <div class="edit-wl-select-all">
+        <label class="edit-wl-select-all-label">
+          <input type="checkbox" class="edit-wl-checkbox" id="edit-wl-select-all-cb" />
+          <span class="edit-wl-select-all-text" id="edit-wl-select-all-text">Select all (0/100)</span>
+        </label>
+      </div>
+    </div>
+    <footer class="edit-wl-footer">
+      <div class="edit-wl-divider-h"></div>
+      <div class="edit-wl-actions">
+        <button type="button" class="edit-wl-btn edit-wl-btn-delete" id="edit-wl-delete">Delete</button>
+        <button type="button" class="edit-wl-btn edit-wl-btn-save" id="edit-wl-save">Save</button>
+      </div>
+    </footer>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

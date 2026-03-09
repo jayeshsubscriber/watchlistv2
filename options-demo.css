@@ -1,0 +1,314 @@
+/* ========== Stocks vs F&O UX options demo ========== */
+.watchlist-demo .demo-option-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 16px;
+  gap: 8px;
+  width: 360px;
+  flex-shrink: 0;
+  background: #f8f8f8;
+  border-bottom: 1px solid #eee;
+}
+
+.demo-option-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #262626;
+}
+
+.demo-option-chips {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demo-chip {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e1e1e1;
+  background: #fff;
+  color: #262626;
+  cursor: pointer;
+}
+
+.demo-chip[aria-pressed="true"] {
+  background: #542087;
+  border-color: #542087;
+  color: #fff;
+}
+
+/* Scroll area for demo content */
+.watchlist-demo .demo-scroll {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 360px;
+  padding: 0 16px 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.demo-panel {
+  display: block;
+  padding-bottom: 24px;
+}
+
+.demo-panel[aria-hidden="true"] {
+  display: none;
+}
+
+/* Section titles (Option A, C) */
+.demo-section,
+.demo-group {
+  margin-bottom: 20px;
+}
+
+.demo-section-title,
+.demo-group-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #262626;
+  margin: 0 0 8px 0;
+  padding: 8px 0 4px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.demo-group-title {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 1;
+  padding: 10px 0 6px 0;
+}
+
+/* Horizontal scroll table wrapper */
+.demo-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 8px;
+  border: 1px solid #f1f1f1;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.demo-table-wrap--stocks { min-width: 0; }
+.demo-table-wrap--fo { min-width: 0; }
+
+.demo-table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  table-layout: fixed;
+}
+
+.demo-table th,
+.demo-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #f1f1f1;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.demo-table th {
+  font-weight: 600;
+  font-size: 11px;
+  color: #777;
+  text-transform: none;
+  background: #fafafa;
+}
+
+.demo-table th:not(:first-child),
+.demo-table td:not(:first-child) {
+  text-align: right;
+}
+
+.demo-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.demo-table td:first-child {
+  max-width: 140px;
+  min-width: 120px;
+  white-space: normal;
+}
+
+.demo-table strong {
+  display: block;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: #262626;
+}
+
+.demo-sub {
+  display: block;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+  color: #777;
+  margin-top: 2px;
+}
+
+.demo-num {
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+.demo-green { color: #008858; font-weight: 500; }
+.demo-red { color: #d53627; font-weight: 500; }
+
+/* Stocks table column widths */
+.demo-table--stocks th:nth-child(1), .demo-table--stocks td:nth-child(1) { width: 120px; min-width: 120px; }
+.demo-table--stocks th:nth-child(2), .demo-table--stocks td:nth-child(2) { width: 72px; }
+.demo-table--stocks th:nth-child(3), .demo-table--stocks td:nth-child(3) { width: 56px; }
+.demo-table--stocks th:nth-child(4), .demo-table--stocks td:nth-child(4) { width: 72px; }
+.demo-table--stocks th:nth-child(5), .demo-table--stocks td:nth-child(5) { width: 44px; }
+.demo-table--stocks th:nth-child(6), .demo-table--stocks td:nth-child(6) { width: 44px; }
+.demo-table--stocks th:nth-child(7), .demo-table--stocks td:nth-child(7) { width: 52px; }
+
+/* F&O table column widths */
+.demo-table--fo th:nth-child(1), .demo-table--fo td:nth-child(1) { width: 120px; min-width: 120px; }
+.demo-table--fo th:nth-child(2), .demo-table--fo td:nth-child(2) { width: 72px; }
+.demo-table--fo th:nth-child(3), .demo-table--fo td:nth-child(3) { width: 56px; }
+.demo-table--fo th:nth-child(4), .demo-table--fo td:nth-child(4) { width: 52px; }
+.demo-table--fo th:nth-child(5), .demo-table--fo td:nth-child(5) { width: 48px; }
+.demo-table--fo th:nth-child(6), .demo-table--fo td:nth-child(6) { width: 56px; }
+
+/* Option B: Tabs */
+.demo-tab-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  padding: 8px 0 12px 0;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+}
+
+.demo-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: #777;
+  padding: 8px 16px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  margin-bottom: -1px;
+}
+
+.demo-tab:hover { color: #262626; }
+
+.demo-tab.demo-tab-active {
+  color: #542087;
+  border-bottom-color: #542087;
+}
+
+.demo-badge {
+  font-weight: 500;
+  font-size: 11px;
+  color: #777;
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.demo-tab.demo-tab-active .demo-badge {
+  background: #fbf8fd;
+  color: #542087;
+}
+
+.demo-tab-panel {
+  display: block;
+}
+
+.demo-tab-panel.demo-tab-panel--hidden {
+  display: none;
+}
+
+/* Option D: Collapsible */
+.demo-collapse {
+  margin-bottom: 8px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.demo-collapse-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 12px 14px;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #262626;
+  background: #fafafa;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.demo-collapse-head:hover {
+  background: #f5f5f5;
+}
+
+.demo-collapse-title { flex: 1; }
+
+.demo-collapse-count {
+  font-weight: 500;
+  font-size: 12px;
+  color: #777;
+  background: #eee;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.demo-collapse-icon {
+  flex: none;
+  color: #777;
+  transition: transform 0.2s ease;
+}
+
+.demo-collapse-body {
+  overflow: hidden;
+  border-top: 1px solid #f1f1f1;
+}
+
+.demo-collapse-body--closed {
+  display: none;
+}
+
+.demo-collapse .demo-table-wrap {
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+.demo-collapse .demo-table {
+  font-size: 12px;
+}
+
+.demo-collapse .demo-table th {
+  padding: 6px 10px;
+}
+
+.demo-collapse .demo-table td {
+  padding: 6px 10px;
+}
